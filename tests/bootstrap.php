@@ -25,8 +25,25 @@ function _manually_load_dependencies()
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_dependencies' );
 
+function _install_woocommerce() {
+	$local_plugin_directory = dirname( dirname( dirname( __FILE__ ) ) );
+
+	if ( ! is_dir( $local_plugin_directory .'/woocommerce' ) ) {
+		$local_plugin_directory = WP_PLUGIN_DIR;
+	}
+
+	define( 'WP_UNINSTALL_PLUGIN', true );
+	include( $local_plugin_directory . '/woocommerce/uninstall.php' );
+
+	WC_Install::install();
+	update_option( 'woocommerce_calc_shipping', 'yes' );
+	$GLOBALS['wp_roles']->reinit();
+}
+
+tests_add_filter( 'setup_theme', '_install_woocommerce' );
+
 function _manually_load_plugin() {
-	require dirname( __FILE__ ) . '/../hello-acf.php';
+	require dirname( __FILE__ ) . '/../hello-woocommerce.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 

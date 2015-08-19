@@ -1,7 +1,7 @@
 <?php
 return array(
-	'advanced-custom-fields' => array(
-		'include' => 'advanced-custom-fields/acf.php',
-		'repo' => 'https://downloads.wordpress.org/plugin/advanced-custom-fields.zip',
+	'woocommerce' => array(
+		'include' => 'woocommerce/woocommerce.php',
+		'repo' => 'https://downloads.wordpress.org/plugin/woocommerce.zip',
 	)
 );
